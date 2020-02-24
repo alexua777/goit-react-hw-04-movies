@@ -16,9 +16,14 @@ const fetchMovieDertailsId = movieId  => {
     .then(res => res.json());
 };
 
-const fetchMovieCastDetails = movieId => {
+const fetchMovieCastDetails = movieId  => {
     return fetch(`${baseURL}/movie/${movieId}/credits?api_key=${apiKEY}`)
     .then(res => res.json());
 };
 
-export default {fetchQueryDetails, fetchMovieDertailsId, fetchMovieCastDetails};
+const fetchMovieReviewsDetails = movieId  => {
+    return fetch(`${baseURL}/movie/${movieId}/reviews?api_key=${apiKEY}`)
+    .then(res => res.json());
+};
+
+export default {fetchQueryDetails, fetchMovieDertailsId, fetchMovieCastDetails, fetchMovieReviewsDetails};

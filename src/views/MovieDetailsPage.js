@@ -3,22 +3,26 @@ import movieAPI from "../service/movie-api";
 import { Link} from "react-router-dom";
 import router from "../router";
 import Cast from './Cast';
+import Reviews from './Reviews';
 
 export default class MovieDetailsPage extends Component {
   state = {
-    movie: null
+    movie: null,
+    cast:null,
+    reviews: null,
   };
 
 
   componentDidMount() {
-    movieAPI
-      .fetchMovieDertailsId(this.props.match.params.movieId)
-      .then(movie => this.setState({ movie }));
+    movieAPI.fetchMovieDertailsId(this.props.match.params.movieId).then(movie => this.setState({ movie }));
+    movieAPI.fetchMovieCastDetails(this.props.match.params.movieId).then(cast => this.setState({cast}));
+    movieAPI.fetchMovieReviewsDetails(this.props.match.params.movieId).then(reviews => this.setState({reviews}));
   }
 
 
   render() {
     console.log(this.state.movie);
+    console.log(this.state.cast);
 
     return (
       <div>
@@ -44,7 +48,9 @@ export default class MovieDetailsPage extends Component {
               </ul>
 
               <p>Additional Information</p>
-                {/* <Cast /> */}
+             
+                <Cast cast={this.state.cast} />
+                <Reviews reviews ={this.state.reviews}/>
             </div>
           </>
         )}
