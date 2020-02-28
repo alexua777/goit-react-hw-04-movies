@@ -59,7 +59,7 @@ export default class MovieDetailsPage extends Component {
               </ul>
 
               <p>Additional Information</p>
-              <NavLink to={router.cast} > Cast </NavLink>
+              <NavLink to={`/movies/${this.state.movie.id}/cast`} > Cast </NavLink>
                 <Switch>
                   <Route path='/cast' component={Cast} />
                   </Switch>
