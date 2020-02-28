@@ -11,6 +11,13 @@ const fetchQueryDetails = () => {
    
 };
 
+const fetchMovieDetailsWithQuery = (query) => {
+    return axios 
+   .get(`${baseURL}/search/movie?api_key=${apiKEY}&query=${query}`)
+    .then(res => res.data.results);
+   
+};
+
 const fetchMovieDertailsId = movieId  => {
     return fetch(`${baseURL}/movie/${movieId}?api_key=${apiKEY}`)
     .then(res => res.json());
@@ -26,4 +33,4 @@ const fetchMovieReviewsDetails = movieId  => {
     .then(res => res.json());
 };
 
-export default {fetchQueryDetails, fetchMovieDertailsId, fetchMovieCastDetails, fetchMovieReviewsDetails};
+export default {fetchQueryDetails, fetchMovieDertailsId, fetchMovieCastDetails, fetchMovieReviewsDetails, fetchMovieDetailsWithQuery};

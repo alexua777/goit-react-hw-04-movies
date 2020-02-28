@@ -1,34 +1,45 @@
 import React, { Component } from "react";
 import movieAPI from "../service/movie-api";
-import { Link} from "react-router-dom";
+import { NavLink, Route, Switch } from "react-router-dom";
 import router from "../router";
-import Cast from './Cast';
-import Reviews from './Reviews';
+import Cast from "./Cast";
+import Reviews from "./Reviews";
 
 export default class MovieDetailsPage extends Component {
   state = {
     movie: null,
-    cast:null,
-    reviews: null,
+    cast: null,
+    reviews: null
   };
 
-
   componentDidMount() {
-    movieAPI.fetchMovieDertailsId(this.props.match.params.movieId).then(movie => this.setState({ movie }));
-    movieAPI.fetchMovieCastDetails(this.props.match.params.movieId).then(cast => this.setState({cast}));
-    movieAPI.fetchMovieReviewsDetails(this.props.match.params.movieId).then(reviews => this.setState({reviews}));
+    movieAPI
+      .fetchMovieDertailsId(this.props.match.params.movieId)
+      .then(movie => this.setState({ movie }));
+    // movieAPI
+    //   .fetchMovieCastDetails(this.props.match.params.movieId)
+    //   .then(cast => this.setState({ cast }));
+    // movieAPI
+    //   .fetchMovieReviewsDetails(this.props.match.params.movieId)
+    //   .then(reviews => this.setState({ reviews }));
   }
 
+  handleBack = () => {
+    const { state } = this.props.location;
+
+    if (state && state.from) {
+      return this.props.history.push(state.from);
+    }
+    this.props.history.push(router.movies);
+  };
 
   render() {
-    console.log(this.state.movie);
-    console.log(this.state.cast);
-
     return (
       <div>
-        <button>
-          <Link to={router.home}>Back</Link>
-        </button><br></br>
+        <button type="button" onClick={this.handleBack}>
+          back
+        </button>
+        <br></br>
 
         {this.state.movie && (
           <>
@@ -48,9 +59,12 @@ export default class MovieDetailsPage extends Component {
               </ul>
 
               <p>Additional Information</p>
-             
-                <Cast cast={this.state.cast} />
-                <Reviews reviews ={this.state.reviews}/>
+              <NavLink to={router.cast} > Cast </NavLink>
+                <Switch>
+                  <Route path='/cast' component={Cast} />
+                  </Switch>
+              {/* <Cast cast={this.state.cast} />
+              <Reviews reviews={this.state.reviews} /> */}
             </div>
           </>
         )}

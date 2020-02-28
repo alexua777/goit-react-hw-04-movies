@@ -1,23 +1,34 @@
 import React, { Component } from "react";
+import movieAPI from "../service/movie-api";
 
-const Cast = ({ cast }) => {
-  console.log(cast);
+export default class Cast extends Component {
+  state = {
+    cast: []
+  };
 
-  return (
-    <>
-      {cast && (
-        <ul>
-          {cast.cast.map(e => (
-            <li key={e.cast_id}>
-              <img src={`https://image.tmdb.org/t/p/w500${e.profile_path}`}/>
-              <p>{e.character}</p>
+  componentDidMount() {
+    movieAPI
+      .fetchMovieCastDetails(this.props.match.params.movieId)
+      .then(cast => this.setState({ cast }));
+  }
+
+  render() {
+    const {cast} = this.state;
+    console.log(cast);
+    return (
+      <>
+        {cast && (
+          <ul>
+            {cast.cast.map(e => (
+              <li key={e.cast_id}>
+                <img src={`https://image.tmdb.org/t/p/w500${e.profile_path}`} />
+                <p>{e.character}</p>
               </li>
-          ))}
-        </ul>
-      )}
-      <h2>Cast </h2>
-    </>
-  );
-};
-
-export default Cast;
+            ))}
+          </ul>
+        )}
+        <h2>Cast </h2>
+      </>
+    );
+  }
+}
