@@ -3,7 +3,7 @@ import movieAPI from "../service/movie-api";
 import { NavLink, Route, Switch } from "react-router-dom";
 import router from "../router";
 import Cast from "./Cast";
-import Reviews from "./Reviews";
+import Reviews from './Reviews';
 
 export default class MovieDetailsPage extends Component {
   state = {
@@ -20,8 +20,8 @@ export default class MovieDetailsPage extends Component {
     //   .fetchMovieCastDetails(this.props.match.params.movieId)
     //   .then(cast => this.setState({ cast }));
     // movieAPI
-    //   .fetchMovieReviewsDetails(this.props.match.params.movieId)
-    //   .then(reviews => this.setState({ reviews }));
+    // .fetchMovieReviewsDetails(this.props.match.params.movieId)
+    // .then(reviews => this.setState({ reviews }));
   }
 
   handleBack = () => {
@@ -34,6 +34,7 @@ export default class MovieDetailsPage extends Component {
   };
 
   render() {
+    const { movie } = this.state;
     return (
       <div>
         <button type="button" onClick={this.handleBack}>
@@ -59,12 +60,13 @@ export default class MovieDetailsPage extends Component {
               </ul>
 
               <p>Additional Information</p>
-              <NavLink to={`/movies/${this.state.movie.id}/cast`} > Cast </NavLink>
-                <Switch>
-                  <Route path='/cast' component={Cast} />
-                  </Switch>
-              {/* <Cast cast={this.state.cast} />
-              <Reviews reviews={this.state.reviews} /> */}
+
+              <NavLink to={`/movies/${movie.id}/cast`}> Cast </NavLink>
+              <NavLink to={`/movies/${movie.id}/reviews`}> Reviews </NavLink>
+          
+                <Route path="/cast" component={Cast} />
+                <Route path="/reviews" component={Reviews} />
+             
             </div>
           </>
         )}

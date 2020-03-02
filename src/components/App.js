@@ -8,6 +8,7 @@ import route from "../router";
 
 import Cast from "../views/Cast";
 import MoviesPage from "../views/MoviesPage";
+import Reviews from "../views/Reviews";
 
 const App = () => (
   <Layout>
@@ -16,6 +17,7 @@ const App = () => (
       <Route path={route.movies} exact component={MoviesPage} />
       <Route path={route.movieId} exact component={MovieDetailsPage} />
       <Route path={route.cast} component={Cast} />
+      <Route path={route.reviews} component={Reviews} />
     </Switch>
   </Layout>
 );
