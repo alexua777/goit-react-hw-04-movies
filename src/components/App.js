@@ -1,25 +1,30 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
 
-import Layout from "./Layout";
-import HomePage from "../views/HomePage";
-import MovieDetailsPage from "../views/MovieDetailsPage";
+import { Route, Switch, Router } from "react-router-dom";
+import React, { Suspense, lazy } from 'react';
 import route from "../router";
+const Layout = React.lazy(() => import("./Layout"));
+const HomePage = React.lazy(() => import("../views/HomePage"));
+const MovieDetailsPage = React.lazy(() => import("../views/MovieDetailsPage"));
+const MoviesPage = React.lazy(() => import("../views/MoviesPage"));
+const Cast = React.lazy(() => import("../views/Cast"));
+const Reviews = React.lazy(() => import("../views/Reviews"));
 
-import Cast from "../views/Cast";
-import MoviesPage from "../views/MoviesPage";
-import Reviews from "../views/Reviews";
+
 
 const App = () => (
-  <Layout>
-    <Switch>
-      <Route path={route.home} exact component={HomePage} />
-      <Route path={route.movies} exact component={MoviesPage} />
-      <Route path={route.movieId} exact component={MovieDetailsPage} />
-      <Route path={route.cast} component={Cast} />
-      <Route path={route.reviews} component={Reviews} />
-    </Switch>
-  </Layout>
+  
+    <Suspense fallback={<div>Loading...</div>}>
+      <Layout>
+        <Switch>
+          <Route path={route.home} exact component={HomePage} />
+          <Route path={route.movieId} exact component={MovieDetailsPage} />
+          <Route path={route.movies} exact component={MoviesPage} />
+          <Route path={route.cast} component={Cast} />
+          <Route path={route.reviews} component={Reviews} />
+        </Switch>
+      </Layout>
+    </Suspense>
+  
 );
 
 export default App;

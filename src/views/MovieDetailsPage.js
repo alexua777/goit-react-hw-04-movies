@@ -35,6 +35,7 @@ export default class MovieDetailsPage extends Component {
 
   render() {
     const { movie } = this.state;
+    console.log(movie);
     return (
       <div>
         <button type="button" onClick={this.handleBack}>
@@ -45,7 +46,7 @@ export default class MovieDetailsPage extends Component {
         {this.state.movie && (
           <>
             <img
-              src={`https://image.tmdb.org/t/p/w500${this.state.movie.backdrop_path}`}
+              src={ `https://image.tmdb.org/t/p/w500${this.state.movie.poster_path}`}
             />
             <div>
               <h3>{this.state.movie.title}</h3>
