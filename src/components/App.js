@@ -17,10 +17,10 @@ const App = () => (
       <Layout>
         <Switch>
           <Route path={route.home} exact component={HomePage} />
-          <Route path={route.movieId} exact component={MovieDetailsPage} />
-          <Route path={route.movies} exact component={MoviesPage} />
-          <Route path={route.cast} component={Cast} />
-          <Route path={route.reviews} component={Reviews} />
+          <Route path={route.movieId} component={MovieDetailsPage} />
+          <Route path={route.movies}  component={MoviesPage} />
+          {/* <Route path={route.cast} component={Cast} />
+          <Route path={route.reviews} component={Reviews} /> */}
         </Switch>
       </Layout>
     </Suspense>

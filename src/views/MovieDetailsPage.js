@@ -35,7 +35,8 @@ export default class MovieDetailsPage extends Component {
 
   render() {
     const { movie } = this.state;
-    console.log(movie);
+    const {match} = this.props;
+    
     return (
       <div>
         <button type="button" onClick={this.handleBack}>
@@ -65,8 +66,8 @@ export default class MovieDetailsPage extends Component {
               <NavLink to={`/movies/${movie.id}/cast`}> Cast </NavLink>
               <NavLink to={`/movies/${movie.id}/reviews`}> Reviews </NavLink>
           
-                <Route path="/cast" component={Cast} />
-                <Route path="/reviews" component={Reviews} />
+                <Route path="/movies/:movieId/cast" component={Cast} />
+                <Route path="/movies/:movieId/reviews" component={Reviews} />
              
             </div>
           </>
